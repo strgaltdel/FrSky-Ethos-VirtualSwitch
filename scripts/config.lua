@@ -5,11 +5,11 @@
 --
 -- Redistribution and use in source and binary forms, with or without
 -- modification, are permitted provided that the following conditions are met:
---	 * Redistributions of source code must retain the above copyright
---	   notice, this list of conditions and the following disclaimer.
---	 * Redistributions in binary form must reproduce the above copyright
---	   notice, this list of conditions and the following disclaimer in the
---	   documentation and/or other materials provided with the distribution.
+--   * Redistributions of source code must retain the above copyright
+--     notice, this list of conditions and the following disclaimer.
+--   * Redistributions in binary form must reproduce the above copyright
+--     notice, this list of conditions and the following disclaimer in the
+--     documentation and/or other materials provided with the distribution.
 --
 -- THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
 -- ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
@@ -23,7 +23,7 @@
 -- SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
--- Rev 0.8	12.01.2022
+-- Rev 0.8  12.01.2022
 
 
 --  ********************************************************
@@ -34,25 +34,25 @@
 --  ********************************************************
 
 function define_actions(model)
-	local normal= 1
-	local left	= 2
-	local right = 3
-	local forward = 4
-	
-	local actionArray = {}
-	
-	if model == "XYZ" then			-- enter dedicated model config here
-	
-	else							-- standard config
-	
-									-- left short                           left mid                        left long                                 right short                                right mid                                   right long
-	  --                        --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-		actionArray[normal] =    {{"playTele",   "Altitude"  },    {"playTmr",         2     },  {"playTele","Dist"  },       {"playTele",  "VFR"         },    {"playTele",  "Consumption"  },    {"playTele"  ,"RSSI"      }  }
-		actionArray[left] 	=    {{"resetTele",  nil         },    {"playTele",  "GPS Speed" },  {"resetAlt",  nil   },       {"playTele",  "ESC Voltage" },    {"print"     ,"lft Rm"       },    {"print"     , "lft RLong"}  }
-		actionArray[right]	=    {{"playTele",   "GPS Speed" },    {"playTele",  "GPS Alt"   },  {"print","rgt Ll"   },       {"playTele",  "GPS Alt"     },    {"print"     ,"rgt Rm"       },    {"print"     , "rgt RLong"}  }                                                                                                                                                   
-		actionArray[forward]=    {{"toggle",                 },    {"print",     "fwd Lm"    },  {"print","fwd Ll"   },       {"toggle",      2           },    {"print"     ,"fwd Rm"       },    {"print"     , "fwd RLong"}  }   
-	end
-	return(actionArray)
+    local normal= 1
+    local left  = 2
+    local right = 3
+    local forward = 4
+    
+    local actionArray = {}
+    
+    if model == "XYZ" then          -- enter dedicated model config here
+    
+    else                            -- standard config
+    
+                                    -- left short                           left mid                        left long                                 right short                                right mid                                   right long
+      --                        --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        actionArray[normal] =    {{"playTele",   "Altitude"  },    {"playTmr",         2     },  {"playTele","Dist"  },       {"playTele",  "VFR"         },    {"playTele",  "Consumption"  },    {"playTele"  ,"RSSI"      }  }
+        actionArray[left]   =    {{"resetTele",  nil         },    {"playTele",  "GPS Speed" },  {"resetAlt",  nil   },       {"playTele",  "ESC Voltage" },    {"print"     ,"lft Rm"       },    {"print"     , "lft RLong"}  }
+        actionArray[right]  =    {{"playTele",   "GPS Speed" },    {"playTele",  "GPS Alt"   },  {"print","rgt Ll"   },       {"playTele",  "GPS Alt"     },    {"print"     ,"rgt Rm"       },    {"print"     , "rgt RLong"}  }                                                                                                                                                   
+        actionArray[forward]=    {{"toggle",                 },    {"print",     "fwd Lm"    },  {"print","fwd Ll"   },       {"toggle",      2           },    {"print"     ,"fwd Rm"       },    {"print"     , "fwd RLong"}  }   
+    end
+    return(actionArray)
 end
 
 
