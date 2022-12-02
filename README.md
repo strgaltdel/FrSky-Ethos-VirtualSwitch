@@ -1,11 +1,11 @@
 #                                           Ethos VirtualSwitch 1.0
 
 ![virtSwitch](https://raw.githubusercontent.com/strgaltdel/FrSky-Ethos-VirtualSwitch/master/img/title.png)
-### Ein Ethos Source script um 24 Funktionen aus nur zwei tastern zu ermöglichen.
+### Ein Ethos Source script um 24 Funktionen aus nur zwei Tastern zu ermöglichen.
 Dez 2022
 
 
-### CKompattibilität
+### Kompatibilität
 
 getestet unter Ethos 1.4.3
 
