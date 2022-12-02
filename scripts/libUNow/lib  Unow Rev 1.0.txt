@@ -1,0 +1,16 @@
+This is library Rev 1.0
+Nov 2022
+
+Udo Nowakowski
+
+
+bmp       some bitmaps
+data      reserved for data written by widgets
+freepic   pics sourced from "freepic" database
+img       (camera) images 
+sounds    sounds used by widgets, non Ethos
+themes    themes used by widgets
+widgets   dev underway, reserved for widgets which are running in a "wrapper" 
+          which allows three widgets in one frame, activated by touch event
+          "wrapper" has to be saved in /scripts/folderXY 
+          each widget frame must have his own unique "wrapper" main.lua	
