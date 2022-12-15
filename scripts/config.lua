@@ -1,4 +1,4 @@
---- The lua library "config.lua" is licensed under the 3-clause BSD license (aka "new BSD")
+--- The file "config.lua" is licensed under the 3-clause BSD license (aka "new BSD")
 ---
 -- Copyright (c) 2022, Udo Nowakowksi
 -- All rights reserved.
@@ -23,9 +23,8 @@
 -- SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
--- Rev 0.8  12.01.2022
-
-
+-- Rev 1.0  12.12.2022      initial release             
+                                    
 --  ********************************************************
 --  **  table which describes 
 --  **  which action in which situation will be called
@@ -34,28 +33,69 @@
 --  ********************************************************
 
 function define_actions(model)
-    local normal= 1
-    local left  = 2
-    local right = 3
-    local forward = 4
+    local normal    = 1
+    local left      = 2
+    local right     = 3
+    local forward   = 4
     
     local actionArray = {}
     
     if model == "XYZ" then          -- enter dedicated model config here
     
-    else                            -- standard config
-    
-                                    -- left short                           left mid                        left long                                 right short                                right mid                                   right long
+    else                            -- standard config  
+                                    -- left short                           left mid                               left long                                 right short                                right mid                                   right long
       --                        --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-        actionArray[normal] =    {{"playTele",   "Altitude"  },    {"playTmr",         2     },  {"playTele","Dist"  },       {"playTele",  "VFR"         },    {"playTele",  "Consumption"  },    {"playTele"  ,"RSSI"      }  }
-        actionArray[left]   =    {{"resetTele",  nil         },    {"playTele",  "GPS Speed" },  {"resetAlt",  nil   },       {"playTele",  "ESC Voltage" },    {"print"     ,"lft Rm"       },    {"print"     , "lft RLong"}  }
-        actionArray[right]  =    {{"playTele",   "GPS Speed" },    {"playTele",  "GPS Alt"   },  {"print","rgt Ll"   },       {"playTele",  "GPS Alt"     },    {"print"     ,"rgt Rm"       },    {"print"     , "rgt RLong"}  }                                                                                                                                                   
-        actionArray[forward]=    {{"toggle",                 },    {"print",     "fwd Lm"    },  {"print","fwd Ll"   },       {"toggle",      2           },    {"print"     ,"fwd Rm"       },    {"print"     , "fwd RLong"}  }   
+        actionArray[normal] =    {{"playTele",  "Altitude"  },    {"playTele",  "ESC Voltage"},  {"playTele","Dist"  },       {"playTmr",   1          },   {"playTele",  "Consumption" },    {"playTmr",   2           }  }
+        actionArray[left]   =    {{"resetAlt",  nil         },    {"print",     "LEFT Lm"    },  {"resetTele", nil   },       {"resetTmr",  1          },   {"print"     ,"LEFT Rm"     },    {"resetTmr",  2           }  }
+        actionArray[right]  =    {{"playTele",  "VFR"       },    {"playTele",  "GPS Alt"    },  {"print","rgt Ll"   },       {"playTele", "Dist"      },   {"playTele" , "RSSI"        },    {"print"    , "rgt RLong" }  }                                                                                                                                                   
+        actionArray[forward]=    {{"toggle",    1           },    {"print",     "fwd Lm"     },  {"print","fwd Ll"   },       {"toggle",    2          },   {"print"     ,"fwd Rm"      },    {"print"    , "fwd RLong" }  }   
     end
     return(actionArray)
 end
+  
+  
+--  ********************************************************
+--  **  some user specific customization
+--  ********************************************************
+ 
+ 
+function config_virtsw()
 
+    local sim <const>               = false                     -- use switches A&B instead of gyro in sim mode 
+                                                                -- sounds
+    local soundfiles <const>        = true                      -- use personalized soundfiles in calls ("reset timer1", "your altitude is..")
+                                                                -- files have to be in "/audio/'languagefolder'/"
+                                                                -- ttsautomate template: "/libunow/sounds" (psv file)                                                               
+    local audiofld <const>          = system.getLocale().."/"   -- lang specific folder
 
+    -- ************      SOUNDFILES     **************
+    -- you'll have to create them on your own (license agreements!)
+    -- you can use ttsautomate, some psv's can be found in /libunow/audio
+    -- it doesn't matter if there was no soundfile for a specific telemetry sensor etc declared, then only its value is announced
+    
+    --                                  label/sensor        folder              file
+    local calls                         = {
+                                        Altitude        =   audiofld    ..  "alti.wav" ,            -- "Alti"
+                                        Dist            =   audiofld    ..  "dist.wav" ,            -- "Dist"
+                                        timer1          =   audiofld    ..  "T1.wav" ,              -- "Timer"
+                                        timer2          =   audiofld    ..  "T2.wav" ,
+                                        timer3          =   audiofld    ..  "T3.wav" ,                                                                      
+                                        resetT1         =   audiofld    ..  "reset_t1.wav" ,        -- "reset timer"
+                                        resetT2         =   audiofld    ..  "reset_t2.wav" ,
+                                        resetT3         =   audiofld    ..  "reset_t3.wav" ,
+                                        resetAlt        =   audiofld    ..  "reset_alt.wav",
+                                        resetTel        =   audiofld    ..  "reset_tel.wav",
+                                        }
+
+    return sim,soundfiles,calls
+end
+  
+--  ********************************************************
+--  **  
+--  **  overview which functions can be called &
+--  **  example list of sensors
+--  **  
+--  ********************************************************
 
 --[[
 ---------
